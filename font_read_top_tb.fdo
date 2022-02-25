@@ -1,0 +1,43 @@
+# Create work library
+#
+vlib work
+#
+# Compile sources
+#
+
+vlog  "../rtl/display.v"
+vlog  "../rtl/display_top.v"
+vlog  "../rtl/font_read_top.v"
+vlog  "../rtl/font10_verdana_decode.v"
+vlog  "../rtl/font12_verdana_decode.v"
+vlog  "../rtl/font14_verdana_decode.v"
+vlog  "../rtl/font16_verdana_decode.v"
+vlog  "../rtl/font18_verdana_decode.v"
+vlog  "../rtl/font22_verdana_decode.v"
+vlog  "../rtl/font28_verdana_decode.v"
+vlog  "../rtl/font36_verdana_decode.v"
+vlog  "../syn_imp/ipcore_dir/clk_gen.v"
+vlog  "../syn_imp/ipcore_dir/fontchar_rom.v"
+vlog  "../tb/font_read_top_tb.v"
+
+# Call vsim to invoke simulator
+#
+vsim -voptargs="+acc" -t 1ps  -L xilinxcorelib_ver -L unisims_ver -L unimacro_ver -L secureip -lib work work.font_read_top_tb
+#
+# Source the wave do file
+#
+do {font_read_top_tb_wave.fdo}
+#
+# Set the window types
+#
+view wave
+view structure
+view signals
+#
+
+# Run simulation for this time
+#
+run 1000ns
+#
+# End
+#
